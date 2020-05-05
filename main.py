@@ -33,21 +33,33 @@ food.penup()
 food.goto(randrange(-(LONG_SIDE_OF_THE_FIELD - 50) // 2, (LONG_SIDE_OF_THE_FIELD - 50) // 2, 20),
           randrange(-(LONG_SIDE_OF_THE_FIELD - 50) // 2, (LONG_SIDE_OF_THE_FIELD - 50) // 2, 20))
 
+
+def is_the_head_in_the_field():
+    x = snake[0].xcor()
+    y = snake[0].ycor()
+    if x > LONG_SIDE_OF_THE_FIELD // 2 \
+            or x < -LONG_SIDE_OF_THE_FIELD // 2 \
+            or y < -LONG_SIDE_OF_THE_FIELD // 2 \
+            or y > LONG_SIDE_OF_THE_FIELD // 2:
+        return False
+    return True
+
+
 direction_of_travel = 'Right'
 
 
 def snake_turns(side):
     global direction_of_travel
-    if side == 'Up' and direction_of_travel != 'Down':
+    if side == 'Up' and direction_of_travel != 'Down' and is_the_head_in_the_field():
         snake[0].setheading(90)
         direction_of_travel = 'Up'
-    if side == 'Down' and direction_of_travel != 'Up':
+    if side == 'Down' and direction_of_travel != 'Up' and is_the_head_in_the_field():
         snake[0].setheading(270)
         direction_of_travel = 'Down'
-    if side == 'Left' and direction_of_travel != 'Right':
+    if side == 'Left' and direction_of_travel != 'Right' and is_the_head_in_the_field():
         snake[0].setheading(180)
         direction_of_travel = 'Left'
-    if side == 'Right' and direction_of_travel != 'Left':
+    if side == 'Right' and direction_of_travel != 'Left' and is_the_head_in_the_field():
         snake[0].setheading(0)
         direction_of_travel = 'Right'
 
@@ -84,12 +96,7 @@ while True:
         for segment_number in range(1, len(snake) // 2):
             snake[segment_number].shapesize(1.2)
 
-    x = snake[0].xcor()
-    y = snake[0].ycor()
-    if x > LONG_SIDE_OF_THE_FIELD // 2 \
-            or x < -LONG_SIDE_OF_THE_FIELD // 2 \
-            or y < -LONG_SIDE_OF_THE_FIELD // 2 \
-            or y > LONG_SIDE_OF_THE_FIELD // 2:
+    if not is_the_head_in_the_field():
         snake_creeps(LONG_SIDE_OF_THE_FIELD, -1)
     else:
         snake_creeps(20)
