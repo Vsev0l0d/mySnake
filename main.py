@@ -84,8 +84,8 @@ def snake_creeps(distance, direction=1):
 
 while True:
     if snake[0].distance(food) < 20:
-        for segment_number in range(len(snake)):
-            while snake[segment_number].distance(food) < 20:
+        for segment in snake:
+            while segment.distance(food) < 20:
                 food.goto(randrange(-(LONG_SIDE_OF_THE_FIELD - 50) // 2, (LONG_SIDE_OF_THE_FIELD - 50) // 2, 20),
                           randrange(-(LONG_SIDE_OF_THE_FIELD - 50) // 2, (LONG_SIDE_OF_THE_FIELD - 50) // 2, 20))
         snake_segment = turtle.Turtle()
