@@ -84,10 +84,16 @@ def snake_creeps(distance, direction=1):
 
 while True:
     if snake[0].distance(food) < 20:
-        for segment in snake:
-            while segment.distance(food) < 20:
-                food.goto(randrange(-(LONG_SIDE_OF_THE_FIELD - 50) // 2, (LONG_SIDE_OF_THE_FIELD - 50) // 2, 20),
-                          randrange(-(LONG_SIDE_OF_THE_FIELD - 50) // 2, (LONG_SIDE_OF_THE_FIELD - 50) // 2, 20))
+        while True:
+            check = True
+            for segment in snake:
+                if segment.distance(food) < 20:
+                    check = False
+                    food.goto(randrange(-(LONG_SIDE_OF_THE_FIELD - 50) // 2, (LONG_SIDE_OF_THE_FIELD - 50) // 2, 20),
+                              randrange(-(LONG_SIDE_OF_THE_FIELD - 50) // 2, (LONG_SIDE_OF_THE_FIELD - 50) // 2, 20))
+            if check:
+                break
+
         snake_segment = turtle.Turtle()
         snake_segment.shape('circle')
         snake_segment.color('dark green')
